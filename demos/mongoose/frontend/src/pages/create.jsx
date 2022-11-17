@@ -9,9 +9,9 @@ export function Create() {
     e.preventDefault();
     const requestData = JSON.stringify({title, content});
     const headers = {"content-type": "application/json"};
-    const request = await fetch("https://localhost:5173/create/");
-    if (request.status != 500) {
-      console.log("cant fetch");
+    const request = await fetch("http://localhost:3000/blog/create-post/",{body:requestData,headers,method:'POST'});
+    if (request.status != 200) {
+      console.log("cant fetch " + request.status);
     }
     else {
       const req = request.json();
@@ -19,7 +19,6 @@ export function Create() {
       setContent(req.content);
       setDone(true);
     }
-    console.log(requestData);
   }
   if (done) {
     return (
