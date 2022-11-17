@@ -1,16 +1,24 @@
-import {useState} from "react";
+import {useState,createContext} from "react";
 import {Link} from "react-router-dom";
 
 export function Create() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [done, setDone] = useState(false);
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const requestData = JSON.stringify({title, content});
     const headers = {"content-type": "application/json"};
-
-    // ??
+    const request = await fetch("https://localhost:5173/create/");
+    if (request.status != 500) {
+      console.log("cant fetch");
+    }
+    else {
+      const req = request.json();
+      setTitle(req.title);
+      setContent(req.content);
+      setDone(true);
+    }
     console.log(requestData);
   }
   if (done) {
