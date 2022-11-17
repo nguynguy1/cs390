@@ -1,9 +1,7 @@
 import express from "express";
 
 import {BlogModel} from "../schema/blog.js";
-
 const router = express.Router();
-
 /* GET users listing. */
 router.get("/", async (req, res, next) => {
   // find blogs based on no condition==> get all blogs
@@ -13,7 +11,6 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/create-post", async (req, res) => {
-  // body should be JSON
   const body = req.body;
   // create blog model with the request body
   const blog = new BlogModel({content: body.content, title: body.title});
